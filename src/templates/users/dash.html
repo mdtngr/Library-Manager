@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'dash.css' %}">
+<script src="{% static 'dash.js'%}"></script>
+{% block content %}
+<!-- <p>THIS IS HOME PAGE</p> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {'packages':['corechart']});
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+
+  // Callback that creates and populates a data table,
+  // instantiates the pie chart, passes in the data and
+  // draws it.
+  function drawChart() {
+
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([
+      ['Mushrooms', 3],
+      ['Onions', 1],
+      ['Olives', 1],
+      ['Zucchini', 1],
+      ['Pepperoni', 2]
+    ]);
+
+    // Set chart options
+    var options = {'title':'How Much Pizza I Ate Last Night',
+                   'width':400,
+                   'height':300};
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+          ['2004/05',  165,      938,         522,             998,           450,      614.6],
+          ['2005/06',  135,      1120,        599,             1268,          288,      682],
+          ['2006/07',  157,      1167,        587,             807,           397,      623],
+          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
+          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
+        ]);
+
+        var options = {
+          title : 'Monthly Coffee Production by Country',
+          vAxis: {title: 'Cups'},
+          hAxis: {title: 'Month'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div2'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+
+  
+{%if request.user.is_authenticated %}
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Dashboard <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'txn'%}">
+              <span data-feather="file"></span>
+              All Transactions
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'all_items'%}">
+              <span data-feather="shopping-cart"></span>
+              Items
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'students' %}">
+              <span data-feather="users"></span>
+              Students
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="bar-chart-2"></span>
+              Staff
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="layers"></span>
+              Reports
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Saved reports</span>
+          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Current month
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Last quarter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Social engagement
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Year-end sale
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+      <!--Div that will hold the pie chart-->
+    <div  id="chart_div" class="col-md-4 flex" style="width: 30%;border: black;border-style: solid; "></div>
+
+    <div  id="chart_div2"  class="col-md-4 flex" style="width: 30%;"></div>
+    
+
+      <h2>Registered Users</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Rollno</th>
+              <th>Year of join</th>
+              <th>Last Login</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for user in all_users%}
+            <tr>
+            
+              <td>{{user.email}}</td>
+              <td>{{user.first_name}}</td>
+              <td>{{user.last_name}}</td>
+              <td>{{user.roll_no}}</td>
+              <td>{{user.year_of_joining}}</td>
+              <td>{{user.last_login}}</td>
+            
+            </tr>
+            {%endfor%}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+{% endif %}
+
+
+<nav aria-label="Page navigation example align-cener">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1"> << </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active">
+      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#"> >> </a>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+
+{% endblock content %}

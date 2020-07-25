@@ -1,0 +1,39 @@
+{% extends 'dash_base.html' %}
+{% load static %}
+
+{%block content%}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Add Item</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+
+      <form class="form-signin" method="post">{% csrf_token %}
+        <label >Book Name</label>
+        <input type="text" name="item_name"  class="form-control" placeholder="Book Name" required autofocus>
+        <label >HSN #</label>
+        <input type="text" name="hsn_code"  class="form-control" placeholder="HSN #" required>
+        <label >Publisher</label>
+        <input type="text" name="publisher" class="form-control" placeholder="Publisher" required>
+        <label >Shelf</label>
+        <input type="text" name="shelf" class="form-control" placeholder="Shelf" required>
+        <label >Qantity</label>
+        <input type="text" name="item_quantity" class="form-control" placeholder="Quantity" required>
+        <label >Author</label>
+        <input type="text" name="author" class="form-control" placeholder="Author" required>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      
+      </form>
+
+{% endblock content %}

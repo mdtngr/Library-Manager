@@ -1,0 +1,82 @@
+{% extends 'dash_base.html' %}
+{% load static %}
+
+{%block content%}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Issue Book</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+
+      <script>
+        $(document).ready(function(){
+          $("#borrow_button").click(function(){
+            $("#borrow_form").show();
+            $("#return_form").hide();
+          });
+        });
+
+        $(document).ready(function(){
+          $("#return_button").click(function(){
+            $("#return_form").show();
+            $("#borrow_form").hide();
+
+          });
+        });
+        </script>
+<div style="margin-bottom: 10px;;">
+<button class="btn btn-warning" id="return_button">Return</button>
+<button class="btn btn-danger" id="borrow_button">Borrow</button>
+</div>
+<div id="borrow_form" style="display: none;">
+<form class="form-signin" method="post">{% csrf_token %}
+        <label class="radio-inline"><input type="radio" name="txn_type" value="True" hidden></label>
+        <input type="text" name="amount" value="0.00"  class="form-control" placeholder="Amount" hidden>
+        <label >Book Id</label>
+        <input type="text" name="item"  class="form-control" placeholder="Book Id" required>
+
+        <label >User Id</label>
+        <input type="text" name="user"  class="form-control" placeholder="User Id" required>
+        <label ></label>
+
+
+
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      
+      </form>
+</div>
+
+
+<div id="return_form" style="display: none;">
+  <form class="form-signin" method="post">{% csrf_token %}
+          <label class="radio-inline"><input type="radio" name="txn_type" value="False" hidden></label>
+          <label >Amount</label>
+          <input type="text" name="amount" value="0.00"  class="form-control" placeholder="Amount" required>
+          <label >Book Id</label>
+          <input type="text" name="item"  class="form-control" placeholder="Book Id" required>
+  
+          <label >User Id</label>
+          <input type="text" name="user"  class="form-control" placeholder="User Id" required>
+          <label ></label>
+  
+  
+  
+          
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        
+        </form>
+
+</div>
+
+{% endblock content %}
