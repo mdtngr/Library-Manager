@@ -2,23 +2,14 @@
 {% load static %}
 
 {%block content%}
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Add Item</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
+         
+      <form class="form-signin" method="post" enctype="multipart/form-data" style="width: 60%;">
+        {% csrf_token %}
+ 
+        <div style="float: right; border: black; border-style: solid;">
+          <input type="file" name="item_image">
         </div>
-      </div>
-
-
-      <form class="form-signin" method="post">{% csrf_token %}
+        
         <label >Book Name</label>
         <input type="text" name="item_name"  class="form-control" placeholder="Book Name" required autofocus>
         <label >HSN #</label>
@@ -31,6 +22,27 @@
         <input type="text" name="item_quantity" class="form-control" placeholder="Quantity" required>
         <label >Author</label>
         <input type="text" name="author" class="form-control" placeholder="Author" required>
+        
+        <label >Book Category</label>
+
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Category
+          </button>
+
+          <button class="btn btn-warning" type="button" aria-expanded="false">
+            Add New Category
+          </button>
+  
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Option 1</a>           
+              <a class="dropdown-item" href="#">Option 2</a>           
+              <a class="dropdown-item" href="#">Option 3</a>           
+          </div>
+        </div>
+
+        <input type="text" name="item_category" class="form-control" placeholder="Category" required>
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
       

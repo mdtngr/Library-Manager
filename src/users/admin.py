@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from users.models import UserData
+from users.models import UserData,Userprofile
 
 # Register your models here.
 
@@ -13,3 +13,4 @@ class MyUserAdmin(UserAdmin):
     list_filter             =()
     fieldsets               =()
 admin.site.register(UserData, MyUserAdmin)
+admin.site.register(Userprofile)

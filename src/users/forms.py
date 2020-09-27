@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 
-from users.models import UserData
+from users.models import UserData,Userprofile
 
 
 
@@ -26,4 +26,11 @@ class UserAuthenticationForm(forms.ModelForm):
             password = self.cleaned_data['password']
             if not authenticate(email = email, password = password):
                 raise forms.ValidationError("Invalid Login")
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Userprofile
+        fields = ['username','phone_number','email','address','profile_picture']
+
         

@@ -11,89 +11,33 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 
-
-<!--Load the AJAX API-->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-
-  // Load the Visualization API and the corechart package.
-  google.charts.load('current', {'packages':['corechart']});
-
-  // Set a callback to run when the Google Visualization API is loaded.
-  google.charts.setOnLoadCallback(drawChart);
-
-  // Callback that creates and populates a data table,
-  // instantiates the pie chart, passes in the data and
-  // draws it.
-  function drawChart() {
-
-    // Create the data table.
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Topping');
-    data.addColumn('number', 'Slices');
-    data.addRows([
-      ['Mushrooms', 3],
-      ['Onions', 1],
-      ['Olives', 1],
-      ['Zucchini', 1],
-      ['Pepperoni', 2]
-    ]);
-
-    // Set chart options
-    var options = {'title':'How Much Pizza I Ate Last Night',
-                   'width':400,
-                   'height':300};
-
-    // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
-</script>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
-
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-          ['2004/05',  165,      938,         522,             998,           450,      614.6],
-          ['2005/06',  135,      1120,        599,             1268,          288,      682],
-          ['2006/07',  157,      1167,        587,             807,           397,      623],
-          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-        ]);
-
-        var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Cups'},
-          hAxis: {title: 'Month'},
-          seriesType: 'bars',
-          series: {5: {type: 'line'}}        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div2'));
-        chart.draw(data, options);
-      }
-    </script>
-
-
-
   
 {%if request.user.is_authenticated %}
+{%if request.user.is_admin%}
+
 
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="sidebar-sticky pt-3">
         <ul class="nav flex-column">
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Dashboard</span>
+            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+
+          
           <li class="nav-item">
-            <a class="nav-link active" href="#">
-              <span data-feather="home"></span>
-              Dashboard <span class="sr-only">(current)</span>
+            <a class="nav-link"href="{% url 'add_txn' %}">
+              <span data-feather="layers"></span>
+              Issue Book
             </a>
           </li>
+
+
+
           <li class="nav-item">
             <a class="nav-link" href="{% url 'txn'%}">
               <span data-feather="file"></span>
@@ -118,12 +62,37 @@
               Staff
             </a>
           </li>
+
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Book Options</span>
+            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+
+
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'add_item'%}">
               <span data-feather="layers"></span>
-              Reports
+              Add Book
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_item'%}">
+              <span data-feather="layers"></span>
+              Update Book
+            </a>
+          </li>
+
+          
+          <li class="nav-item">
+            <a class="nav-link"href="{% url 'add_txn' %}">
+              <span data-feather="layers"></span>
+              Delete Book
+            </a>
+          </li>
+
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -176,11 +145,7 @@
         </div>
       </div>
 
-      <!--Div that will hold the pie chart-->
-    <div  id="chart_div" class="col-md-4 flex" style="width: 30%;border: black;border-style: solid; "></div>
-
-    <div  id="chart_div2"  class="col-md-4 flex" style="width: 30%;"></div>
-    
+  
 
       <h2>Registered Users</h2>
       <div class="table-responsive">
@@ -216,7 +181,7 @@
   </div>
 </div>
 
-{% endif %}
+
 
 
 <nav aria-label="Page navigation example align-cener">
@@ -238,5 +203,8 @@
 
 
 
+{% endif %}
 
+<center><h1>ACCESS DENIED!!</h1></center>
+{% endif %}
 {% endblock content %}

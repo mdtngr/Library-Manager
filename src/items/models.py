@@ -11,6 +11,11 @@ from django.db import models
 
 # Create your models here.
 
+class Categories(models.Model):
+    category_id     = models.IntegerField(primary_key=True) 
+    category_name   = models.CharField(null =False, blank =False, max_length = 15)
+
+
 class ItemDetails(models.Model):
     item_id             = models.IntegerField(primary_key=True, null=False, auto_created=True)
     item_name           = models.CharField(null=False, blank=False, max_length=50)
@@ -21,6 +26,11 @@ class ItemDetails(models.Model):
     author              = models.CharField(default="Unknown", max_length=30)
     item_category       = models.CharField(default='None', max_length=15)
     item_quantity       = models.IntegerField(default=0, null=False)
+    item_image          = models.ImageField(upload_to='static_cdn/img', null = True, blank= True)
     
-    # slugify             = models.SlugField(blank=True, unique=True)
-    # item_image          = models.ImageField(upload_location = upload_location, null = False, blank= False)
+    def __str__(self):
+        return self.item_name
+
+
+
+        

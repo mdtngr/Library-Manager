@@ -13,19 +13,34 @@
 
 
   
+
+  
 {%if request.user.is_authenticated %}
+{%if request.user.is_admin%}
+
 
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="sidebar-sticky pt-3">
         <ul class="nav flex-column">
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Dashboard</span>
+            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+
+          
           <li class="nav-item">
-            <a class="nav-link active" href="#">
-              <span data-feather="home"></span>
-              Dashboard <span class="sr-only">(current)</span>
+            <a class="nav-link"href="{% url 'add_txn' %}">
+              <span data-feather="layers"></span>
+              Issue Book
             </a>
           </li>
+
+
+
           <li class="nav-item">
             <a class="nav-link" href="{% url 'txn'%}">
               <span data-feather="file"></span>
@@ -39,7 +54,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'dash' %}">
+            <a class="nav-link" href="{% url 'students' %}">
               <span data-feather="users"></span>
               Students
             </a>
@@ -50,12 +65,37 @@
               Staff
             </a>
           </li>
+
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Book Options</span>
+            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+
+
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'add_item'%}">
               <span data-feather="layers"></span>
-              Reports
+              Add Book
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_item'%}">
+              <span data-feather="layers"></span>
+              Update Book
+            </a>
+          </li>
+
+          
+          <li class="nav-item">
+            <a class="nav-link"href="{% url 'add_txn' %}">
+              <span data-feather="layers"></span>
+              Delete Book
+            </a>
+          </li>
+
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -144,7 +184,6 @@
   </div>
 </div>
 
-{% endif %}
 
 
 <nav aria-label="Page navigation example align-cener">
@@ -165,6 +204,7 @@
 
 
 
-
+{% endif %}
+{% endif %}
 
 {% endblock content %}

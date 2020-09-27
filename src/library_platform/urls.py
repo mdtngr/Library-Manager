@@ -21,9 +21,9 @@ from django.conf import settings
 
 # MY VIEWS
 
-from users.views import(dash_view, home_screen_view, registration_view, logout_view, login_view, all_students_view)
+from users.views import(dash_view, home_screen_view, registration_view, logout_view, login_view, all_students_view, profile_view, profileedit_view)
 from transactions.views import(all_txn_view, add_txn_view)
-from items.views import(all_item_view, add_item_view,)
+from items.views import(all_item_view, add_item_view,item_detail_view)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +35,8 @@ urlpatterns = [
     path('register/', registration_view, name="register"),
     path('logout/', logout_view, name="logout"),
     path('login/', login_view, name="login"),
+    path('profile/', profile_view, name='profile'),
+    path('profileedit/', profileedit_view, name='profileedit'),
 
     # transactions
     path('txn/', all_txn_view, name="txn"),
@@ -45,6 +47,7 @@ urlpatterns = [
     path('', all_item_view, name="home"),
     path('items/', all_item_view, name="all_items"),
     path('add_item/', add_item_view, name="add_item"),
+    path('detail/<int:book_id>/', item_detail_view, name="item_detail")
 
 
 ]

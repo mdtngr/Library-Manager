@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
+
 # Create your models here.
 
 class MyAccountManager(BaseUserManager):
@@ -66,5 +67,16 @@ class UserData(AbstractBaseUser):
         verbose_name_plural = "User Data"
 
 
+class Userprofile(models.Model):
+
+    user = models.ForeignKey(UserData,on_delete=models.CASCADE,null=True,blank=True)    
+    username = models.CharField(max_length=100,blank=True)
+    phone_number = models.BigIntegerField(blank=True,null=True)
+    email = models.EmailField(max_length=100,blank=True,null=True)
+    address = models.TextField(max_length=400,blank=True,null=True)
+    profile_picture = models.ImageField(upload_to='static_cdn/profile_image', blank=True,null=True)
+
+    def __str__(self):
+        return self.username    
 
     

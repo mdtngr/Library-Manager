@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{%load static%
+{%load static%}
 
     {%block content%}
 
@@ -12,9 +12,11 @@
 
         <h3 class="my-4">Categories</h3>
         <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
+          
+          {%for category_name in categories %}
+          <a href="#" class="list-group-item">{{category_name}}</a>
+          {%endfor%}
+
         </div>
 
       </div>
@@ -30,13 +32,13 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+              <img class="d-block img-fluid" src="{% static 'image/book_banner1.jfif' %}" alt="First slide" height="250" width="950">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+               <img class="d-block img-fluid" src="{% static 'image/book_banner2.jfif' %}" alt="Second slide" height="400" width="950">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+              <img class="d-block img-fluid" src="{% static 'image/book_banner3.jfif' %}" alt="Third slide slide" height="400" width="950">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -52,19 +54,25 @@
         <div class="row">
 
         {%for item in all_items%}
-          <div class="col-lg-4 col-md-6 mb-4">
+          <div class="col-sm-3 col-sm-3 mb-3">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                 <a href="#">{{item.item_name}}</a>
-                </h4>
-                 <h5>HSN-{{item.item_quantity}}</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+              {% if item.item_image %}
+              <a href="#"><img class="card-img-top" src="{{item.item_image.url}}" height="300"></a>
+              {% else %}
+               <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              {% endif %}
+
+              <div class="card-body" style="padding-bottom:0;">
+                <h5 class="card-title">
+                 <a href="{% url 'item_detail' item.hsn_code %}">{{item.item_name}}</a>
+                </h5>
+
+                <!-- <h6>{{item.item_quantity}}</h6> -->
+                <p>Rating- {{item.item_quantity}}</p>
+
+
               </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
+
             </div>
           </div>
 

@@ -52,19 +52,6 @@
       {%endif%}
       {%endif%}
 
-
-      <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Book Menu
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'add_item'%}">Add Book</a>
-          <a class="dropdown-item" href="#">Update Book</a>
-          <!-- <div class="dropdown-divider"></div> -->
-          <a class="dropdown-item" href="#">Remove Book</a>
-        </div>
-      </li>
-
       
       <li class="nav-item">
         <a class="nav-link active" href="#">Trending</a>
@@ -81,6 +68,7 @@
 
 
     {%if request.user.is_authenticated %}
+    <a href="{% url 'profile' %}"><button type="button" class="btn btn-info">profile</button></a>
     <a href="{%url 'logout'%}"><button type="button" class="btn btn-warning">Logout, {{request.user.first_name}}</button></a>
     {%else%}
     <a href="{%url 'login' %}" ><button type="button" class="btn btn-warning">Login</button></a>
