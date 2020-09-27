@@ -45,9 +45,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'all_items'%}">
+            <a class="nav-link" href="{% url 'all_items_admin'%}">
               <span data-feather="shopping-cart"></span>
-              Items
+              Inventory
             </a>
           </li>
           <li class="nav-item">
@@ -95,38 +95,7 @@
 
         </ul>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
-          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Year-end sale
-            </a>
-          </li>
-        </ul>
+         
       </div>
     </nav>
 
@@ -145,45 +114,16 @@
         </div>
       </div>
 
-  
+      {{message}}
 
-      <h2>Registered Users</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>First name</th>
-              <th>Last name</th>
-              <th>Rollno</th>
-              <th>Year of join</th>
-              <th>Last Login</th>
-            </tr>
-          </thead>
-          <tbody>
-            {%for user in all_users%}
-            <tr>
-            
-              <td>{{user.email}}</td>
-              <td>{{user.first_name}}</td>
-              <td>{{user.last_name}}</td>
-              <td>{{user.roll_no}}</td>
-              <td>{{user.year_of_joining}}</td>
-              <td>{{user.last_login}}</td>
-            
-            </tr>
-            {%endfor%}
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      
     </main>
   </div>
 </div>
 
 
 
-
+<!-- 
 <nav aria-label="Page navigation example align-cener">
   <ul class="pagination">
     <li class="page-item disabled">
@@ -199,12 +139,14 @@
     </li>
   </ul>
 </nav>
-
+ -->
 
 
 
 {% endif %}
 
+{%else%}
 <center><h1>ACCESS DENIED!!</h1></center>
+
 {% endif %}
 {% endblock content %}

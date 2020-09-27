@@ -13,7 +13,7 @@ def home_screen_view(request):
 
 def dash_view(request):
     context={}
-    context['all_users'] =  UserData.objects.all()
+    context['message'] = " Welcome to user dash!!"
     
     return render(request, 'users/dash.html', context)
 
