@@ -8,4 +8,3 @@ class AddItemForm(ModelForm):
     class Meta():
         model = models.ItemDetails
         fields = ['item_name', 'hsn_code', 'publisher', 'shelf','item_quantity', 'author', 'item_category', 'item_image']
-

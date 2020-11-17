@@ -12,6 +12,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<!-- <script src="../static/jquery_full.js"></script> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 </head>
 <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
@@ -50,11 +52,13 @@
 
     </ul>
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="margin-right: 6px;">Search</button>
+    <form class="form-inline my-2 my-lg-0" id="query_form" >
+      {% csrf_token %}
+      <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" name='item_name'  id="query_databox">
+      <button class="btn btn-secondary my-2 my-sm-0" name="query_data" id="search_submit" type="submit" style="margin-right: 6px;">Search</button>
     </form>
+
+
 
 
 
@@ -74,9 +78,16 @@
 
 
 <body>
+  
+  <div id="result_div">
+THIS IS RESULT DIV!!!
+  </div>
+
   {% block content%}
 
   {% endblock content%}
+
+ 
 </body>
 
 <footer class="footer m-auto py-5" style="top: 100vh;;">
@@ -97,5 +108,44 @@
       
     </div>
   </footer>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+  <script>
+
+    const searchbox = document.getElementById("search_submit");
+    searchbox.addEventListener("click", submitHandler);
+    
+    function submitHandler(e)
+    {
+      e.preventDefault();      
+      //  Print the data
+      
+      const send_data= document.getElementById("query_databox").value;
+    
+      $.ajax({
+                type: 'POST',
+                // url: 'http://127.0.0.1:8000/filter_item' ,
+                url: '{% url 'filter_item' %}' ,
+                data: {"data": send_data, "csrfmiddlewaretoken" : "{{csrf_token}}" },
+                dataType: 'json',
+                success: successhandler,
+
+      })
+    
+    }
+
+    function successhandler(response_data)
+    {
+      var result_div  = document.getElementById("result_div");
+      result_div.innerHTML = response_data['a'];
+    }
+
+     </script>
+
+
+
 
 </html>

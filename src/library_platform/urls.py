@@ -23,7 +23,7 @@ from django.conf import settings
 
 from users.views import(dash_view, home_screen_view, registration_view, logout_view, login_view, all_students_view, profile_view, profileedit_view)
 from transactions.views import(all_txn_view, add_txn_view)
-from items.views import(all_item_view, all_item_admin_view, add_item_view,item_detail_view)
+from items.views import(all_item_view, all_item_admin_view, add_item_view,item_detail_view, filter_item_view)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -48,7 +48,9 @@ urlpatterns = [
     path('all_items_admin/', all_item_admin_view, name="all_items_admin"),
     path('items/', all_item_view, name="all_items"),
     path('add_item/', add_item_view, name="add_item"),
-    path('detail/<int:book_id>/', item_detail_view, name="item_detail")
+    path('detail/<int:book_id>/', item_detail_view, name="item_detail"),
+    path('filter_item/', filter_item_view, name="filter_item"),
+
 
 
 ]
